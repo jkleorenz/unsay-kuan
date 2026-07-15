@@ -2,11 +2,19 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BusinessController;
+use App\Models\Business;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', fn () => Inertia::render('Home'));
+Route::get('/', function () {
+    $featured = Business::approved()->where('featured', true)
+        ->with('category')->latest()->take(6)->get();
+
+    return Inertia::render('Home', [
+        'featured' => $featured,
+    ]);
+});
 
 Route::get('/businesses', [BusinessController::class, 'index'])->name('businesses.index');
 Route::get('/businesses/submit', [BusinessController::class, 'create'])->name('businesses.create');
