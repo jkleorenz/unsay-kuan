@@ -1,0 +1,24 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\Category;
+use Illuminate\Database\Seeder;
+
+class CategorySeeder extends Seeder
+{
+    public function run(): void
+    {
+        $categories = [
+            'Restaurant', 'Cafe', 'Hotel', 'Resort', 'Shop',
+            'Grocery', 'Services', 'Health', 'Education', 'Transport',
+        ];
+
+        foreach ($categories as $name) {
+            Category::firstOrCreate(
+                ['slug' => \Str::slug($name)],
+                ['name' => $name]
+            );
+        }
+    }
+}
