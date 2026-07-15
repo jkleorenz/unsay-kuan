@@ -10,15 +10,27 @@ class CategorySeeder extends Seeder
 {
     public function run(): void
     {
-        $categories = [
+        $businessCategories = [
             'Restaurant', 'Cafe', 'Hotel', 'Resort', 'Shop',
             'Grocery', 'Services', 'Health', 'Education', 'Transport',
         ];
 
-        foreach ($categories as $name) {
+        foreach ($businessCategories as $name) {
             Category::firstOrCreate(
                 ['slug' => Str::slug($name)],
-                ['name' => $name]
+                ['name' => $name, 'type' => 'business']
+            );
+        }
+
+        $jobCategories = [
+            'General Labor', 'Retail', 'Food & Beverage', 'Skilled Trades',
+            'Domestic & Household', 'Office & Admin', 'Teaching & Training', 'Healthcare',
+        ];
+
+        foreach ($jobCategories as $name) {
+            Category::firstOrCreate(
+                ['slug' => Str::slug($name)],
+                ['name' => $name, 'type' => 'job']
             );
         }
     }

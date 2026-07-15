@@ -1,4 +1,4 @@
-import { Head } from '@inertiajs/react';
+import { Head, router } from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 
 export default function Index({ businesses, filters }) {
@@ -34,18 +34,10 @@ export default function Index({ businesses, filters }) {
                 <td className="p-2 space-x-2">
                   <a href={`/admin/businesses/${b.id}/edit`} className="text-blue-600">Edit</a>
                   {b.status !== 'approved' && (
-                    <form method="POST" action={`/admin/businesses/${b.id}/approve`} className="inline">
-                      <button className="text-green-600">Approve</button>
-                    </form>
+                    <button className="text-green-600" onClick={() => router.post(`/admin/businesses/${b.id}/approve`)}>Approve</button>
                   )}
-                  <form method="POST" action={`/admin/businesses/${b.id}/feature`} className="inline">
-                    <button className="text-purple-600">Feature</button>
-                  </form>
-                  <form method="POST" action={`/admin/businesses/${b.id}`} className="inline"
-                        onSubmit={e => { if(!confirm('Delete?')) e.preventDefault(); }}>
-                    <input type="hidden" name="_method" value="DELETE" />
-                    <button className="text-red-600">Delete</button>
-                  </form>
+                  <button className="text-purple-600" onClick={() => router.post(`/admin/businesses/${b.id}/feature`)}>Feature</button>
+                  <button className="text-red-600" onClick={() => { if (confirm('Delete this business?')) router.delete(`/admin/businesses/${b.id}`); }}>Delete</button>
                 </td>
               </tr>
             ))}

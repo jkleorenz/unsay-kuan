@@ -1,15 +1,15 @@
 import { Head } from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 
-const comingSoon = ['Jobs', 'Tourism', 'Community'];
+const comingSoon = ['Tourism', 'Community'];
 
-export default function Home({ featured }) {
+export default function Home({ featured, jobs }) {
   return (
     <AuthenticatedLayout>
-      <Head title="TownLink Hub" />
+      <Head title="Unsay Kuan?" />
       <div className="max-w-5xl mx-auto p-6">
         <section className="text-center py-10">
-          <h1 className="text-4xl font-bold">TownLink Hub</h1>
+          <h1 className="text-4xl font-bold">Unsay Kuan?</h1>
           <p className="text-gray-500 mt-2">Jobs, businesses, tourism & community — all in one place.</p>
 
           <form method="GET" action="/businesses" className="mt-6 flex max-w-md mx-auto gap-2">
@@ -34,6 +34,26 @@ export default function Home({ featured }) {
             )}
           </div>
           <a href="/businesses" className="text-blue-600 mt-4 inline-block">Browse all businesses</a>
+        </section>
+
+        <section className="mt-10">
+          <h2 className="text-2xl font-bold mb-4">Featured Jobs</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {jobs.map((job) => (
+              <a key={job.id} href={`/jobs/${job.id}`}
+                 className="block border rounded p-4 hover:shadow">
+                <h3 className="font-semibold">{job.title}</h3>
+                <p className="text-sm text-gray-500">{job.company}</p>
+                <p className="text-sm text-gray-500">{job.location}</p>
+                <span className="inline-block mt-2 text-xs bg-gray-100 text-gray-700 rounded px-2 py-1">{job.type}</span>
+                <p className="text-xs text-gray-400 mt-2">{job.category?.name}</p>
+              </a>
+            ))}
+            {jobs.length === 0 && (
+              <p className="text-gray-500">No jobs posted yet.</p>
+            )}
+          </div>
+          <a href="/jobs" className="text-blue-600 mt-4 inline-block">Browse all jobs</a>
         </section>
 
         <section className="mt-10">
