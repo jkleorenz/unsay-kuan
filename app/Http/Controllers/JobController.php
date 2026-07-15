@@ -33,8 +33,11 @@ class JobController extends Controller
 
         $jobs = $query->latest()->paginate(12)->withQueryString();
 
+        $featured = Job::approved()->with('category')->latest()->take(6)->get();
+
         return Inertia::render('Jobs/Index', [
             'jobs' => $jobs,
+            'featured' => $featured,
             'categories' => Category::where('type', 'job')->orderBy('name')->get(['id', 'name', 'slug']),
             'jobTypes' => ['Full-time', 'Part-time', 'Contract', 'Temporary', 'Internship'],
             'filters' => $request->only(['q', 'category', 'type']),

@@ -21,32 +21,32 @@ export default function Edit({ business, categories }) {
       <div className="max-w-2xl mx-auto p-6">
         <h1 className="text-2xl font-bold mb-4">Edit Business</h1>
         <form onSubmit={submit} className="space-y-4">
-          <input className="w-full border rounded px-3 py-2" value={data.name}
+          <input className="w-full border border-gray-300 rounded-xl px-3 py-2" value={data.name}
                  onChange={e => setData('name', e.target.value)} />
-          <input className="w-full border rounded px-3 py-2" value={data.owner_name}
+          <input className="w-full border border-gray-300 rounded-xl px-3 py-2" value={data.owner_name}
                  onChange={e => setData('owner_name', e.target.value)} />
-          <input className="w-full border rounded px-3 py-2" value={data.contact_number}
+          <input className="w-full border border-gray-300 rounded-xl px-3 py-2" value={data.contact_number}
                  onChange={e => setData('contact_number', e.target.value)} />
-          <textarea className="w-full border rounded px-3 py-2" value={data.address}
+          <textarea className="w-full border border-gray-300 rounded-xl px-3 py-2" value={data.address}
                     onChange={e => setData('address', e.target.value)} />
-          <select className="w-full border rounded px-3 py-2" value={data.category_id}
+          <select className="w-full border border-gray-300 rounded-xl px-3 py-2" value={data.category_id}
                   onChange={e => setData('category_id', e.target.value)}>
             {categories.map((c) => (<option key={c.id} value={c.id}>{c.name}</option>))}
           </select>
-          <textarea className="w-full border rounded px-3 py-2" value={data.description}
+          <textarea className="w-full border border-gray-300 rounded-xl px-3 py-2" value={data.description}
                     onChange={e => setData('description', e.target.value)} />
-          <input className="w-full border rounded px-3 py-2" value={data.operating_hours}
+          <input className="w-full border border-gray-300 rounded-xl px-3 py-2" value={data.operating_hours}
                  onChange={e => setData('operating_hours', e.target.value)} />
-          <select className="w-full border rounded px-3 py-2" value={data.status}
+          <select className="w-full border border-gray-300 rounded-xl px-3 py-2" value={data.status}
                   onChange={e => setData('status', e.target.value)}>
             <option value="pending">pending</option>
             <option value="approved">approved</option>
             <option value="rejected">rejected</option>
           </select>
-          <textarea className="w-full border rounded px-3 py-2" value={data.rejection_reason}
+          <textarea className="w-full border border-gray-300 rounded-xl px-3 py-2" value={data.rejection_reason}
                     onChange={e => setData('rejection_reason', e.target.value)}
                     placeholder="Rejection reason (if rejected)" />
-          <button disabled={processing} className="bg-blue-600 text-white px-4 py-2 rounded">Save</button>
+          <button disabled={processing} className="bg-gray-900 text-white rounded-full px-5 py-2.5 text-sm font-medium hover:bg-gray-800 transition">Save</button>
         </form>
       </div>
     </AuthenticatedLayout>

@@ -1,9 +1,9 @@
 import { Head } from '@inertiajs/react';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import PublicLayout from '@/Layouts/PublicLayout';
 
 export default function Show({ job }) {
   return (
-    <AuthenticatedLayout>
+    <PublicLayout>
       <Head title={job.title} />
       <div className="max-w-3xl mx-auto p-6">
         <h1 className="text-2xl font-bold">{job.title}</h1>
@@ -18,8 +18,8 @@ export default function Show({ job }) {
           <div><dt className="font-semibold">Description</dt><dd>{job.description}</dd></div>
         </dl>
 
-        <a href="/jobs" className="text-blue-600 mt-6 inline-block">Back to listings</a>
+        <a href="/jobs" className="text-gray-600 hover:text-gray-900 mt-6 inline-block">Back to listings</a>
       </div>
-    </AuthenticatedLayout>
+    </PublicLayout>
   );
 }

@@ -29,8 +29,12 @@ class BusinessController extends Controller
 
         $businesses = $query->latest()->paginate(12)->withQueryString();
 
+        $featured = Business::approved()->where('featured', true)
+            ->with('category')->latest()->take(6)->get();
+
         return Inertia::render('Businesses/Index', [
             'businesses' => $businesses,
+            'featured' => $featured,
             'categories' => Category::orderBy('name')->get(['id', 'name', 'slug']),
             'filters' => $request->only(['search', 'category']),
         ]);

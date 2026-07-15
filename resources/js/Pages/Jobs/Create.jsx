@@ -1,5 +1,5 @@
 import { Head, useForm } from '@inertiajs/react';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import PublicLayout from '@/Layouts/PublicLayout';
 
 export default function Create({ categories, jobTypes }) {
   const { data, setData, post, processing, errors } = useForm({
@@ -13,22 +13,22 @@ export default function Create({ categories, jobTypes }) {
   }
 
   return (
-    <AuthenticatedLayout>
+    <PublicLayout>
       <Head title="Post a Job" />
       <div className="max-w-2xl mx-auto p-6">
         <h1 className="text-2xl font-bold mb-4">Post a Job</h1>
         <form onSubmit={submit} className="space-y-4">
-          <input className="w-full border rounded px-3 py-2" placeholder="Job title"
+          <input className="w-full border border-gray-300 rounded-xl px-3 py-2" placeholder="Job title"
                  value={data.title} onChange={e => setData('title', e.target.value)} />
           {errors.title && <p className="text-red-600 text-sm">{errors.title}</p>}
 
-          <input className="w-full border rounded px-3 py-2" placeholder="Company (optional)"
+          <input className="w-full border border-gray-300 rounded-xl px-3 py-2" placeholder="Company (optional)"
                  value={data.company} onChange={e => setData('company', e.target.value)} />
 
-          <input className="w-full border rounded px-3 py-2" placeholder="Location (optional)"
+          <input className="w-full border border-gray-300 rounded-xl px-3 py-2" placeholder="Location (optional)"
                  value={data.location} onChange={e => setData('location', e.target.value)} />
 
-          <select className="w-full border rounded px-3 py-2" value={data.type}
+          <select className="w-full border border-gray-300 rounded-xl px-3 py-2" value={data.type}
                   onChange={e => setData('type', e.target.value)}>
             <option value="">Select type (optional)</option>
             {jobTypes.map((t) => (
@@ -36,7 +36,7 @@ export default function Create({ categories, jobTypes }) {
             ))}
           </select>
 
-          <select className="w-full border rounded px-3 py-2" value={data.category_id}
+          <select className="w-full border border-gray-300 rounded-xl px-3 py-2" value={data.category_id}
                   onChange={e => setData('category_id', e.target.value)}>
             <option value="">Select category (optional)</option>
             {categories.map((c) => (
@@ -44,22 +44,22 @@ export default function Create({ categories, jobTypes }) {
             ))}
           </select>
 
-          <textarea className="w-full border rounded px-3 py-2" placeholder="Description"
+          <textarea className="w-full border border-gray-300 rounded-xl px-3 py-2" placeholder="Description"
                     value={data.description} onChange={e => setData('description', e.target.value)} />
           {errors.description && <p className="text-red-600 text-sm">{errors.description}</p>}
 
-          <input className="w-full border rounded px-3 py-2" placeholder="Contact email (optional)"
+          <input className="w-full border border-gray-300 rounded-xl px-3 py-2" placeholder="Contact email (optional)"
                  value={data.contact_email} onChange={e => setData('contact_email', e.target.value)} />
           {errors.contact_email && <p className="text-red-600 text-sm">{errors.contact_email}</p>}
 
-          <input className="w-full border rounded px-3 py-2" placeholder="Contact phone (optional)"
+          <input className="w-full border border-gray-300 rounded-xl px-3 py-2" placeholder="Contact phone (optional)"
                  value={data.contact_phone} onChange={e => setData('contact_phone', e.target.value)} />
 
-          <button disabled={processing} className="bg-blue-600 text-white px-4 py-2 rounded">
+          <button disabled={processing} className="bg-gray-900 text-white rounded-full px-5 py-2.5 text-sm font-medium hover:bg-gray-800 transition">
             Submit
           </button>
         </form>
       </div>
-    </AuthenticatedLayout>
+    </PublicLayout>
   );
 }

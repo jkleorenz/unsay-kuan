@@ -3,22 +3,15 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BusinessController;
 use App\Http\Controllers\JobController;
-use App\Models\Business;
-use App\Models\Job;
+use App\Http\Controllers\TourismController;
+use App\Http\Controllers\CommunityController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
-    $featured = Business::approved()->where('featured', true)
-        ->with('category')->latest()->take(6)->get();
-
-    $jobs = Job::approved()->with('category')->latest()->limit(6)->get();
-
-    return Inertia::render('Home', [
-        'featured' => $featured,
-        'jobs' => $jobs,
-    ]);
+    return Inertia::render('Home');
 });
 
 Route::get('/businesses', [BusinessController::class, 'index'])->name('businesses.index');
@@ -30,6 +23,18 @@ Route::get('/jobs', [JobController::class, 'index'])->name('jobs.index');
 Route::get('/jobs/create', [JobController::class, 'create'])->name('jobs.create');
 Route::post('/jobs', [JobController::class, 'store'])->name('jobs.store');
 Route::get('/jobs/{job}', [JobController::class, 'show'])->name('jobs.show');
+
+Route::get('/tourism', [TourismController::class, 'index'])->name('tourism.index');
+Route::get('/tourism/submit', [TourismController::class, 'create'])->name('tourism.create');
+Route::post('/tourism', [TourismController::class, 'store'])->name('tourism.store');
+Route::get('/tourism/{tourism}', [TourismController::class, 'show'])->name('tourism.show');
+
+Route::get('/community', [CommunityController::class, 'index'])->name('community.index');
+Route::get('/community/submit', [CommunityController::class, 'create'])->name('community.create');
+Route::post('/community', [CommunityController::class, 'store'])->name('community.store');
+Route::get('/community/{post}', [CommunityController::class, 'show'])->name('community.show');
+
+Route::get('/search', [SearchController::class, 'index'])->name('search');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

@@ -33,5 +33,28 @@ class CategorySeeder extends Seeder
                 ['name' => $name, 'type' => 'job']
             );
         }
+
+        $tourismCategories = [
+            'Attraction', 'Resort', 'Hotel', 'Restaurant',
+            'Beach', 'Museum', 'Park', 'Services',
+        ];
+
+        foreach ($tourismCategories as $name) {
+            Category::firstOrCreate(
+                ['slug' => Str::slug($name)],
+                ['name' => $name, 'type' => 'tourism']
+            );
+        }
+
+        $communityCategories = [
+            'Announcement', 'Help Request', 'Volunteer', 'Event',
+        ];
+
+        foreach ($communityCategories as $name) {
+            Category::firstOrCreate(
+                ['slug' => Str::slug($name)],
+                ['name' => $name, 'type' => 'community']
+            );
+        }
     }
 }

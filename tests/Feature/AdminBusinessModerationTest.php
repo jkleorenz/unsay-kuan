@@ -14,7 +14,7 @@ class AdminBusinessModerationTest extends TestCase
     public function test_admin_can_approve_a_business(): void
     {
         $this->seed();
-        $admin = User::first();
+        $admin = User::where('role', 'admin')->firstOrFail();
         $business = Business::factory()->create(['status' => 'pending']);
 
         $this->actingAs($admin)
@@ -32,5 +32,15 @@ class AdminBusinessModerationTest extends TestCase
         $business = Business::factory()->create();
 
         $this->get("/admin/businesses/{$business->id}/edit")->assertRedirect('/login');
+    }
+
+    public function test_non_admin_cannot_access_admin(): void
+    {
+        $user = User::factory()->create(['role' => 'user']);
+        $business = Business::factory()->create();
+
+        $this->actingAs($user)
+            ->get("/admin/businesses/{$business->id}/edit")
+            ->assertForbidden();
     }
 }

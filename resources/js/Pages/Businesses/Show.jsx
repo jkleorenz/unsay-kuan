@@ -1,9 +1,9 @@
 import { Head } from '@inertiajs/react';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import PublicLayout from '@/Layouts/PublicLayout';
 
 export default function Show({ business }) {
   return (
-    <AuthenticatedLayout>
+    <PublicLayout>
       <Head title={business.name} />
       <div className="max-w-3xl mx-auto p-6">
         <h1 className="text-2xl font-bold">{business.name}</h1>
@@ -25,8 +25,8 @@ export default function Show({ business }) {
           </div>
         )}
 
-        <a href="/businesses" className="text-blue-600 mt-6 inline-block">Back to directory</a>
+        <a href="/businesses" className="text-gray-600 hover:text-gray-900 mt-6 inline-block">Back to directory</a>
       </div>
-    </AuthenticatedLayout>
+    </PublicLayout>
   );
 }
