@@ -1,9 +1,13 @@
 <?php
 
+use App\Http\Controllers\Admin\CommunityPostController as AdminCommunityPostController;
+use App\Http\Controllers\Admin\TourismController as AdminTourismController;
 use App\Http\Controllers\Admin\VerificationController;
 use App\Http\Controllers\BusinessController;
 use App\Http\Controllers\JobApplicationController;
 use App\Http\Controllers\JobController;
+use App\Http\Controllers\CommunityPostController;
+use App\Http\Controllers\TourismController;
 use App\Http\Controllers\Owner\BusinessController as OwnerBusinessController;
 use App\Http\Controllers\Owner\JobController as OwnerJobController;
 use App\Http\Controllers\ProfileController;
@@ -26,6 +30,12 @@ Route::get('/businesses/{slug}', [BusinessController::class, 'show'])->name('bus
 Route::get('/jobs', [JobController::class, 'index'])->name('jobs.index');
 Route::get('/jobs/{slug}', [JobController::class, 'show'])->name('jobs.show');
 
+Route::get('/tourism', [TourismController::class, 'index'])->name('tourism.index');
+Route::get('/tourism/{slug}', [TourismController::class, 'show'])->name('tourism.show');
+
+Route::get('/community-posts', [CommunityPostController::class, 'index'])->name('community-posts.index');
+Route::get('/community-posts/{slug}', [CommunityPostController::class, 'show'])->name('community-posts.show');
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -44,12 +54,21 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/jobs/{job}/apply', [JobApplicationController::class, 'store'])->name('jobs.apply');
     Route::get('/my-applications', [JobApplicationController::class, 'myApplications'])->name('my-applications');
+
+    Route::get('/community-posts/create', [CommunityPostController::class, 'create'])->name('community-posts.create');
+    Route::post('/community-posts', [CommunityPostController::class, 'store'])->name('community-posts.store');
 });
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/verifications', [VerificationController::class, 'index'])->name('verifications.index');
     Route::post('/verifications/{business}/approve', [VerificationController::class, 'approve'])->name('verifications.approve');
     Route::post('/verifications/{business}/reject', [VerificationController::class, 'reject'])->name('verifications.reject');
+
+    Route::resource('tourism', AdminTourismController::class);
+
+    Route::get('/community-posts', [AdminCommunityPostController::class, 'index'])->name('admin.community-posts.index');
+    Route::post('/community-posts/{communityPost}/approve', [AdminCommunityPostController::class, 'approve'])->name('admin.community-posts.approve');
+    Route::delete('/community-posts/{communityPost}', [AdminCommunityPostController::class, 'destroy'])->name('admin.community-posts.destroy');
 });
 
 require __DIR__.'/auth.php';

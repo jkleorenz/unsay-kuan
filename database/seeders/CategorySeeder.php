@@ -20,5 +20,15 @@ class CategorySeeder extends Seeder
         foreach ($categories as $cat) {
             Category::create($cat);
         }
+
+        $tourism = [
+            ['name' => 'Natural Attractions', 'slug' => 'natural-attractions', 'type' => 'tourism'],
+            ['name' => 'Historical Sites', 'slug' => 'historical-sites', 'type' => 'tourism'],
+            ['name' => 'Adventure & Outdoor', 'slug' => 'adventure-outdoor', 'type' => 'tourism'],
+        ];
+
+        foreach ($tourism as $cat) {
+            Category::create($cat);
+        }
     }
 }

@@ -9,6 +9,9 @@ class TownSeeder extends Seeder
 {
     public function run(): void
     {
-        Town::create(['name' => 'Mahaplag', 'slug' => 'mahaplag', 'description' => 'The first town on Unsay Kuan?']);
+        Town::firstOrCreate(
+            ['slug' => 'mahaplag'],
+            ['name' => 'Mahaplag', 'description' => 'The first town on Unsay Kuan?']
+        );
     }
 }
