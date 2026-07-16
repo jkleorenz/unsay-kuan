@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->string('action');
-            $table->morphs('target');
+            $table->nullableMorphs('target');
             $table->text('description')->nullable();
             $table->timestamps();
         });

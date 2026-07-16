@@ -8,8 +8,11 @@ import { useState } from 'react';
 export default function AuthenticatedLayout({ header, children }) {
     const user = usePage().props.auth.user;
     const isAdmin = usePage().props.isAdmin;
+    const role = usePage().props.userRole;
 
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
+
+    const canSee = (targetRole) => role === targetRole || isAdmin;
 
     return (
         <div className="min-h-screen bg-gray-100">
@@ -25,10 +28,10 @@ export default function AuthenticatedLayout({ header, children }) {
 
                             <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                 <NavLink href={route('dashboard')} active={route().current('dashboard')}>Dashboard</NavLink>
-                                <NavLink href={route('owner.businesses.index')} active={route().current('owner.businesses*')}>My Businesses</NavLink>
-                                <NavLink href={route('owner.jobs.index')} active={route().current('owner.jobs*')}>My Jobs</NavLink>
-                                <NavLink href={route('my-applications')} active={route().current('my-applications')}>Applications</NavLink>
-                                <NavLink href={route('community-posts.create')} active={route().current('community-posts.create')}>Write Post</NavLink>
+                                {canSee('business_owner') && <NavLink href={route('owner.businesses.index')} active={route().current('owner.businesses*')}>My Businesses</NavLink>}
+                                {canSee('business_owner') && <NavLink href={route('owner.jobs.index')} active={route().current('owner.jobs*')}>My Jobs</NavLink>}
+                                {(canSee('job_seeker') || canSee('business_owner')) && <NavLink href={route('my-applications')} active={route().current('my-applications')}>Applications</NavLink>}
+                                {(canSee('community_poster') || canSee('business_owner')) && <NavLink href={route('community-posts.create')} active={route().current('community-posts.create')}>Write Post</NavLink>}
                                 {isAdmin && <NavLink href={route('admin.dashboard')} active={route().current('admin.*')}>Admin</NavLink>}
                             </div>
                         </div>
@@ -68,10 +71,10 @@ export default function AuthenticatedLayout({ header, children }) {
                 <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
                     <div className="space-y-1 pb-3 pt-2">
                         <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>Dashboard</ResponsiveNavLink>
-                        <ResponsiveNavLink href={route('owner.businesses.index')} active={route().current('owner.businesses*')}>My Businesses</ResponsiveNavLink>
-                        <ResponsiveNavLink href={route('owner.jobs.index')} active={route().current('owner.jobs*')}>My Jobs</ResponsiveNavLink>
-                        <ResponsiveNavLink href={route('my-applications')} active={route().current('my-applications')}>Applications</ResponsiveNavLink>
-                        <ResponsiveNavLink href={route('community-posts.create')} active={route().current('community-posts.create')}>Write Post</ResponsiveNavLink>
+                        {canSee('business_owner') && <ResponsiveNavLink href={route('owner.businesses.index')} active={route().current('owner.businesses*')}>My Businesses</ResponsiveNavLink>}
+                        {canSee('business_owner') && <ResponsiveNavLink href={route('owner.jobs.index')} active={route().current('owner.jobs*')}>My Jobs</ResponsiveNavLink>}
+                        {(canSee('job_seeker') || canSee('business_owner')) && <ResponsiveNavLink href={route('my-applications')} active={route().current('my-applications')}>Applications</ResponsiveNavLink>}
+                        {(canSee('community_poster') || canSee('business_owner')) && <ResponsiveNavLink href={route('community-posts.create')} active={route().current('community-posts.create')}>Write Post</ResponsiveNavLink>}
                         {isAdmin && <ResponsiveNavLink href={route('admin.dashboard')} active={route().current('admin.*')}>Admin</ResponsiveNavLink>}
                     </div>
                     <div className="border-t border-gray-200 pb-1 pt-4">
@@ -88,7 +91,7 @@ export default function AuthenticatedLayout({ header, children }) {
             </nav>
 
             {header && (
-                <header className="bg-white shadow">
+                <header className="bg-white border-b border-gray-200">
                     <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">{header}</div>
                 </header>
             )}

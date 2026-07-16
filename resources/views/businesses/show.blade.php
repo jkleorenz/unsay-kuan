@@ -20,7 +20,10 @@
                 @endif
             </div>
             @if ($business->is_verified)
-                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-success/10 text-success">Verified</span>
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-medium bg-blue-500 text-white">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1.5l1.6 1.1 1.9-.4 1 1.7 1.8.7-.3 1.9 1.4 1.4-1.1 1.6.4 1.9-1.7 1-1.5 1.3.3 1.9-1.8.7-1 1.7-1.9-.4L12 22.5l-1.6-1.1-1.9.4-1-1.7-1.8-.7.3-1.9L5.6 16l1.1-1.6-.4-1.9 1.7-1 1.5-1.3-.3-1.9 1.8-.7 1-1.7 1.9.4L12 1.5zm-1 14.6l5-5-1.3-1.3-3.7 3.7-1.6-1.6L8 13.9l3 3.2z"/></svg>
+                    Verified
+                </span>
             @else
                 <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-warning/10 text-warning">Pending verification</span>
             @endif

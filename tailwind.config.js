@@ -13,17 +13,22 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Inter', ...defaultTheme.fontFamily.sans],
+                sans: ['Lora', ...defaultTheme.fontFamily.sans],
+                display: ['"Space Mono"', 'monospace'],
             },
             colors: {
                 accent: {
-                    50: '#EEF2FF',
-                    100: '#E0E7FF',
-                    200: '#C7D2FE',
-                    400: '#818CF8',
-                    500: '#6366F1',
-                    600: '#4F46E5',
-                    700: '#4338CA',
+                    50: '#f0fdf3',
+                    100: '#dcfce4',
+                    200: '#bcf6cb',
+                    300: '#87eea3',
+                    400: '#4cdc74',
+                    500: '#24c351',
+                    600: '#179e3d',
+                    700: '#167f34',
+                    800: '#17642e',
+                    900: '#155228',
+                    950: '#052e12',
                 },
                 gray: {
                     0: '#FFFFFF',
@@ -38,6 +43,13 @@ export default {
                 success: '#16A34A',
                 danger: '#DC2626',
                 warning: '#D97706',
+                blue: {
+                    50: '#eff6ff',
+                    100: '#dbeafe',
+                    500: '#3B82F6',
+                    600: '#2563EB',
+                    700: '#1D4ED8',
+                },
             },
             borderRadius: {
                 sm: '6px',

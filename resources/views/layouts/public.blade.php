@@ -10,7 +10,7 @@
 <body class="font-sans antialiased bg-gray-0 text-gray-900">
     <nav class="bg-gray-0 border-b border-gray-200">
         <div class="max-w-7xl mx-auto px-4 flex items-center justify-between h-16">
-            <a href="/" class="text-lg font-semibold text-gray-900">{{ config('app.name', 'Unsay Kuan?') }}</a>
+            <a href="/" class="text-lg font-bold font-display text-gray-900">{{ config('app.name', 'Unsay Kuan?') }}</a>
             <div class="flex items-center gap-4 text-sm">
                 <a href="{{ route('businesses.index') }}" class="text-gray-500 hover:text-accent-700 transition-colors duration-150">Businesses</a>
                 @auth

@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('verification_logs', function (Blueprint $table) {
             $table->id();
-            $table->morphs('verifiable');
+            $table->nullableMorphs('verifiable');
             $table->foreignId('verified_by')->constrained('users')->cascadeOnDelete();
             $table->string('action'); // approved, rejected, pending
             $table->text('notes')->nullable();

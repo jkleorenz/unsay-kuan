@@ -21,7 +21,13 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
             ],
-            'isAdmin' => $request->user()?->hasRole('admin') ?? false,
+            'isAdmin' => $request->user()?->hasRole('admin'),
+            'userRole' => $request->user()?->getRoleNames()->first(),
         ];
+    }
+
+    protected function resolveUserInstance(Request $request): void
+    {
+        //
     }
 }
