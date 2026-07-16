@@ -63,4 +63,11 @@
             @endif
         </div>
     </div>
+
+    <div class="mt-6">
+        @include('partials.report-button', [
+            'reportableType' => 'App\Models\Business',
+            'reportableId' => $business->id,
+        ])
+    </div>
 @endsection
