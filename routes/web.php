@@ -56,11 +56,11 @@ Route::middleware('auth')->group(function () {
         Route::put('/applications/{application}', [JobApplicationController::class, 'updateStatus'])->name('applications.update');
     });
 
-    Route::post('/jobs/{job}/apply', [JobApplicationController::class, 'store'])->name('jobs.apply');
+    Route::post('/jobs/{job}/apply', [JobApplicationController::class, 'store'])->middleware('throttle:applications')->name('jobs.apply');
     Route::get('/my-applications', [JobApplicationController::class, 'myApplications'])->name('my-applications');
 
     Route::get('/community-posts/create', [CommunityPostController::class, 'create'])->name('community-posts.create');
-    Route::post('/community-posts', [CommunityPostController::class, 'store'])->name('community-posts.store');
+    Route::post('/community-posts', [CommunityPostController::class, 'store'])->middleware('throttle:posts')->name('community-posts.store');
 
     Route::post('/reports', [ReportController::class, 'store'])->name('reports.store');
 });

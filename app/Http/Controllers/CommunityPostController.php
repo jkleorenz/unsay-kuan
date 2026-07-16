@@ -43,7 +43,7 @@ class CommunityPostController extends Controller
         $data['user_id'] = auth()->id();
         $data['slug'] = str($data['title'])->slug() . '-' . uniqid();
         $data['is_approved'] = false;
-        // ponytail: HTML purifier is installed (mews/purifier) but not wired yet; add when rich-text is enabled
+        $data['content'] = clean($data['content']);
 
         CommunityPost::create($data);
 
